@@ -1,0 +1,208 @@
+#PerceptronReadme {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	border-style: solid;
+	border-width: 3px;
+	border-color: rgb(255, 255, 255);
+	height: 11px;
+	width: 11px;
+	background-color: rgb(255, 0, 0);
+	outline-style: solid;
+	outline-width: 3px;
+	outline-color: rgb(255, 0, 0);
+}
+
+#PerceptronTrainButton {
+	position: absolute;
+	top: 14px;
+	left: 60px;
+	padding-left: 3px;
+	padding-right: 3px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(250, 250, 250, 0.7);
+	font-size: 24px;
+	cursor: pointer;
+}
+
+#PerceptronResetButton {
+	position: absolute;
+	top: 14px;
+	left: 140px;
+	padding-left: 3px;
+	padding-right: 3px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(250, 250, 250, 0.7);
+	font-size: 24px;
+	cursor: pointer;
+}
+
+#PerceptronStartButton {
+	position: absolute;
+	top: 14px;
+	left: 200px;
+	padding-left: 3px;
+	padding-right: 3px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(250, 250, 250, 0.7);
+	font-size: 24px;
+	cursor: pointer;
+}
+
+#PerceptronTimeCounterLabel {
+	position: absolute;
+	top: 60px;
+	left: 30px;
+	width: 30px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border: 0;
+	font-size: 18px;
+}
+#PerceptronTimeCounter {
+	position: absolute;
+	top: 60px;
+	left: 70px;
+	width: 80px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(250, 250, 250, 0.7);
+	font-size: 18px;
+}
+
+#PerceptronTrainDataNumLabel {
+	position: absolute;
+	top: 60px;
+	left: 205px;
+	width: 50px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border: 0;
+	font-size: 18px;
+}
+#PerceptronTrainDataNum {
+	position: absolute;
+	top: 60px;
+	left: 255px;
+	width: 40px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(250, 250, 250, 0.7);
+	font-size: 18px;
+}
+#PerceptronInputDataNumLabel {
+	position: absolute;
+	top: 60px;
+	left: 310px;
+	width: 60px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border: 0;
+	font-size: 18px;
+}
+#PerceptronInputDataNum {
+	position: absolute;
+	top: 60px;
+	left: 370px;
+	width: 40px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(250, 250, 250, 0.7);
+	font-size: 18px;
+}
+
+#PerceptronConsole {
+	position: absolute;
+	top: 300px;
+	right: 20px;
+	width: 300px;
+	min-height: 400px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(50, 50, 50, 0.7);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(150, 150, 150, 0.7);
+	outline: 0;
+	font-size: 9px;
+}
+
+#PerceptronParameterDispBox {
+	position: absolute;
+	top: 60px;
+	right: 20px;
+	width: 310px;
+	height: 155px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgba(150, 150, 150, 0.3);
+	outline: 0;
+}
+
+.PerceptronParameterLabel {
+	position: absolute;
+	width: 40px;
+	height: 20px;
+	left: 4px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 0, 0, 0.7);
+	border: 0;
+	outline: 0;
+	font-size: 14px;
+}
+
+.PerceptronParameterDisp {
+	position: absolute;
+	width: 250px;
+	height: 20px;
+	left: 54px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(60, 0, 0, 0.7);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(150, 150, 150, 0.7);
+	outline: 0;
+	font-size: 14px;
+}
+
+#PerceptronWeight0Label {
+	position: absolute;
+	top: 5px;
+}
+#PerceptronWeight0Disp {
+	position: absolute;
+	top: 5px;
+}
+
+#PerceptronWeight1Label {
+	position: absolute;
+	top: 30px;
+}
+#PerceptronWeight1Disp {
+	position: absolute;
+	top: 30px;
+}
+
+#PerceptronBiasLabel {
+	position: absolute;
+	top: 55px;
+}
+#PerceptronBiasDisp {
+	position: absolute;
+	top: 55px;
+}
+
