@@ -14,10 +14,10 @@ class Perceptron {
 		this.trainButton = null;
 		this.timeCounter = null;
 		this.timeCounterLabel = null;
-		this.dataNum = null;
-		this.dataNumLabel = null;
-		this.inputNum = null;
-		this.inputNumLabel = null;
+		this.trainDataNumBox = null;
+		this.trainDataNumLabel = null;
+		this.inputDataNumbox = null;
+		this.inputDataNumLabel = null;
 		this.parameterDispBox = null;
 		this.weight0Disp = null;
 		this.weight1Disp = null;
@@ -40,7 +40,9 @@ class Perceptron {
 			normalizeW: false,
 			trainEnabled: false};
 		// data
+		this.trainDataNum = 60;
 		this.data = [];
+		this.inputDataNum = 0;
 		this.input = []; // data which is not used for training
 		// loop instance
 		this.loopInterval = null;
@@ -110,24 +112,26 @@ class Perceptron {
 		this.rootWindow.appendChild(this.timeCounterLabel);
 
 		this.trainDataNumLabel = document.createElement("div");
-		this.trainDataNumLabel.innerHTML = "training data";
+		this.trainDataNumLabel.innerHTML = "training&nbsp;data";
 		this.trainDataNumLabel.id = "PerceptronTrainDataNumLabel";
 		this.rootWindow.appendChild(this.trainDataNumLabel);
 
-		this.trainDataNum = document.createElement("div");
-		this.trainDataNum.rootInstance = this;
-		this.trainDataNum.id = "PerceptronTrainDataNum";
-		this.rootWindow.appendChild(this.trainDataNum);
+		this.trainDataNumBox = document.createElement("div");
+		this.trainDataNumBox.rootInstance = this;
+		this.trainDataNumBox.id = "PerceptronTrainDataNum";
+		this.trainDataNumBox.innerHTML = this.trainDataNum;
+		this.rootWindow.appendChild(this.trainDataNumBox);
 
 		this.inputDataNumLabel = document.createElement("div");
 		this.inputDataNumLabel.innerHTML = "input";
 		this.inputDataNumLabel.id = "PerceptronInputDataNumLabel";
 		this.rootWindow.appendChild(this.inputDataNumLabel);
 
-		this.inputDataNum = document.createElement("div");
-		this.inputDataNum.rootInstance = this;
-		this.inputDataNum.id = "PerceptronInputDataNum";
-		this.rootWindow.appendChild(this.inputDataNum);
+		this.inputDataNumBox = document.createElement("div");
+		this.inputDataNumBox.rootInstance = this;
+		this.inputDataNumBox.id = "PerceptronInputDataNum";
+		this.inputDataNumBox.innerHTML = this.inputDataNum;
+		this.rootWindow.appendChild(this.inputDataNumBox);
 
 		// Parameter Display
 		this.parameterDispBox = document.createElement("div");
@@ -350,11 +354,15 @@ class Perceptron {
 		this.parameterDisp();
 	}
 
+
+	// Display
 	parameterDisp()
 	{
 		this.weight0Disp.innerHTML = this.perceptron.w.get(0, 0);
 		this.weight1Disp.innerHTML = this.perceptron.w.get(1, 0);
 		this.biasDisp.innerHTML = this.perceptron.b[0];
+		this.trainDataNumBox.innerHTML = this.trainDataNum;
+		this.inputDataNumBox.innerHTML = this.inputDataNum;
 	}
 
 
