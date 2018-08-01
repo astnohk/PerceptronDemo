@@ -68,7 +68,7 @@ class Perceptron {
 		}
 
 		// Set random data
-		this.addRandomTrainingData();
+		this.addRandomTrainingData(100, 3);
 	}
 
 	reinit()
@@ -79,7 +79,7 @@ class Perceptron {
 		this.initPerceptron();
 
 		// Set random data
-		this.addRandomTrainingData();
+		this.addRandomTrainingData(100, 3);
 	}
 
 	prepareTools()
@@ -255,28 +255,30 @@ class Perceptron {
 
 
 	// ----- Perceptron -----
-	addRandomTrainingData()
+	addRandomTrainingData(N, C)
 	{
+		if (N < 1) {
+			N = 50;
+		}
+		if (C < 2) {
+			C = 2;
+		}
 		let coeff = 1.0;
-		let v_x = (Math.random() - 0.5);
-		let v_y = (Math.random() - 0.5);
-		let v_n = Math.sqrt(v_x * v_x + v_y * v_y);
-		v_x /= v_n;
-		v_y /= v_n;
-		let w_x = (Math.random() - 0.5);
-		let w_y = (Math.random() - 0.5);
-		let w_n = Math.sqrt(w_x * w_x + w_y * w_y);
-		w_x /= w_n;
-		w_y /= w_n;
-		for (let i = 0; i < 60; i++) {
+		let v_c = [];
+		for (let i = 0; i < C; i++) {
+			let v_x = (Math.random() - 0.5);
+			let v_y = (Math.random() - 0.5);
+			let v_n = Math.sqrt(v_x * v_x + v_y * v_y);
+			v_x /= v_n;
+			v_y /= v_n;
+			v_c.push({x: v_x, y: v_y});
+		}
+		for (let i = 0; i < N; i++) {
 			let x = (Math.random() - 0.5) * coeff;
 			let y = (Math.random() - 0.5) * coeff;
 			try {
-				if (Math.random() - 0.5 > 0) {
-					this.addTrainingData([x + v_x, y + v_y], 0);
-				} else {
-					this.addTrainingData([x + w_x, y + w_y], 1);
-				}
+				let Class = Math.floor(Math.random() * C);
+				this.addTrainingData([x + v_c[Class].x, y + v_c[Class].y], Class);
 			} catch (e) {
 				console.log(e.name(), e.message());
 			}
@@ -384,37 +386,43 @@ class Perceptron {
 		this.context.stroke();
 
 		// Draw w
-		this.context.strokeStyle = "rgb(255, 255, 0)";
-		this.context.beginPath();
-		this.context.moveTo(this.plotOffset.x, this.plotOffset.y);
-		this.context.lineTo(
-		    this.plotOffset.x + 10 * this.plotScale * this.perceptron.w.get(0, 0),
-		    this.plotOffset.y - 10 * this.plotScale * this.perceptron.w.get(1, 0));
-		this.context.stroke();
+		for (let i = 0; i < this.perceptron.outputDim; i++) {
+			this.context.strokeStyle = `rgb(255, ${255 - 127 * i}, 0)`;
+			this.context.beginPath();
+			this.context.moveTo(this.plotOffset.x, this.plotOffset.y);
+			this.context.lineTo(
+			    this.plotOffset.x + 10 * this.plotScale * this.perceptron.w.get(0, i),
+			    this.plotOffset.y - 10 * this.plotScale * this.perceptron.w.get(1, i));
+			this.context.stroke();
+		}
 
 		// Draw g(x) == 0
-		let norm = Math.sqrt(Math.pow(this.perceptron.w.get(0, 0), 2) +
-			Math.pow(this.perceptron.w.get(1, 0), 2));
-		let v_zero = [
-			-this.perceptron.b[0] * this.perceptron.w.get(0, 0) / norm / norm,
-			-this.perceptron.b[0] * this.perceptron.w.get(1, 0) / norm / norm];
-		let v_norm = [-this.perceptron.w.get(1, 0) / norm, this.perceptron.w.get(0, 0) / norm];
-		this.context.strokeStyle = "rgb(0, 0, 255)";
-		this.context.beginPath();
-		this.context.moveTo(
-		    this.plotOffset.x + (v_zero[0] + 200 * v_norm[0]) * this.plotScale,
-		    this.plotOffset.y + -(v_zero[1] + 200 * v_norm[1]) * this.plotScale);
-		this.context.lineTo(
-		    this.plotOffset.x + (v_zero[0] - 200 * v_norm[0]) * this.plotScale,
-		    this.plotOffset.y + -(v_zero[1] - 200 * v_norm[1]) * this.plotScale);
-		this.context.stroke();
+		for (let i = 0; i < this.perceptron.outputDim; i++) {
+			let norm = Math.sqrt(Math.pow(this.perceptron.w.get(0, i), 2) +
+				Math.pow(this.perceptron.w.get(1, i), 2));
+			let v_zero = [
+				-this.perceptron.b[i] * this.perceptron.w.get(0, i) / norm / norm,
+				-this.perceptron.b[i] * this.perceptron.w.get(1, i) / norm / norm];
+			let v_norm = [-this.perceptron.w.get(1, i) / norm, this.perceptron.w.get(0, i) / norm];
+			this.context.strokeStyle = `rgb(${Math.max(255 - 255 * i, 0)}, ${255 * i}, 0)`;
+			this.context.beginPath();
+			this.context.moveTo(
+			    this.plotOffset.x + (v_zero[0] + 200 * v_norm[0]) * this.plotScale,
+			    this.plotOffset.y + -(v_zero[1] + 200 * v_norm[1]) * this.plotScale);
+			this.context.lineTo(
+			    this.plotOffset.x + (v_zero[0] - 200 * v_norm[0]) * this.plotScale,
+			    this.plotOffset.y + -(v_zero[1] - 200 * v_norm[1]) * this.plotScale);
+			this.context.stroke();
+		}
 
 		// Plot data
 		for (let i = 0; i < this.data.length; i++) {
 			if (this.data[i].c == 0) {
 				this.context.strokeStyle = "rgb(255, 0, 0)";
-			} else {
+			} else if (this.data[i].c == 1) {
 				this.context.strokeStyle = "rgb(0, 255, 0)";
+			} else {
+				this.context.strokeStyle = "rgb(0, 0, 255)";
 			}
 			this.context.beginPath();
 			this.context.arc(
